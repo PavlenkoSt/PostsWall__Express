@@ -1,6 +1,7 @@
 import express from 'express'
 import mongoose from 'mongoose'
 import router from './Router.js'
+
 import fileUpload from 'express-fileupload'
 import cors from 'cors'
 
@@ -23,8 +24,10 @@ app.get('/', (request, responce) => {
 async function startApp(){
     try{
         await mongoose.connect(DB_URL, { useNewUrlParser: true, useUnifiedTopology: true });
+        // tslint:disable-next-line:no-console
         app.listen(PORT, () => console.log(`Server is open - http://localhost:${PORT}/`));
     }catch(e){
+        // tslint:disable-next-line:no-console
         console.log(e);
     }
 };

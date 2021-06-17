@@ -3,7 +3,7 @@ import FileService from './FileService.js';
 
 
 class PostService{
-    async create(post, picture){
+    async create(post: any, picture: any){
         const fileName = FileService.saveFile(picture);
         const newPost = await Post.create({...post, picture: fileName });
         return newPost;
@@ -14,7 +14,7 @@ class PostService{
         return posts;
     }
 
-    async getOne(id){
+    async getOne(id: any){
         if(!id){
             throw new Error('id не указан');
         }
@@ -22,7 +22,7 @@ class PostService{
         return post;
     }
 
-    async update(post){
+    async update(post: any){
         if(!post._id){
             throw new Error('id не указан');
         }
@@ -30,7 +30,7 @@ class PostService{
         return updatedPost;
     }
 
-    async delete(id){
+    async delete(id: any){
         if(!id){
             throw new Error('id не указан');
         }
