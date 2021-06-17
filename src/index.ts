@@ -1,4 +1,4 @@
-import express from 'express'
+import express, { Request, response, Response } from 'express'
 import mongoose from 'mongoose'
 import router from './Router.js'
 
@@ -17,7 +17,7 @@ app.use(express.static('static'));
 app.use(fileUpload());
 app.use('/api', router);
 
-app.get('/', (request, responce) => {
+app.get('/', (request: Request, responce: Response) => {
     responce.status(200).json('Сервер работает!');
 });
 

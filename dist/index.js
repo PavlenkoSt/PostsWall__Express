@@ -26,6 +26,10 @@ app.use(express_1.default.json());
 app.use(express_1.default.static('static'));
 app.use(express_fileupload_1.default());
 app.use('/api', Router_js_1.default);
+app.get('/imgs/:img', (request, responce) => {
+    // responce.status(200).json('Путь работает!');
+    responce.status(200).send(`<img src="../static/${request.body.img}" alt="1"/>`);
+});
 app.get('/', (request, responce) => {
     responce.status(200).json('Сервер работает!');
 });
