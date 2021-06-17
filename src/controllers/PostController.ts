@@ -1,16 +1,18 @@
+import { Request, Response } from 'express';
+import { UploadedFile } from 'express-fileupload';
 import PostService from '../services/PostService.js';
 
 class PostController {
-    async create(request: any, responce: any){
+    async create(request: Request, responce: Response){
         try{
-            const post = await PostService.create(request.body, request.files.picture);
+            const post = await PostService.create(request.body, request.files.picture as UploadedFile);
             responce.json(post);
         }catch(e){
             responce.status(500).json(e);
         }
     }
 
-    async getAll(request: any, responce: any){
+    async getAll(request: Request, responce: Response){
         try{
             const posts = await PostService.getAll();
             return responce.json(posts);
@@ -19,7 +21,7 @@ class PostController {
         }
     }
 
-    async getOne(request: any, responce: any){
+    async getOne(request: Request, responce: Response){
         try{
             const post = await PostService.getOne(request.params.id)
             return responce.json(post);
@@ -28,7 +30,7 @@ class PostController {
         }
     }
 
-    async update(request: any, responce: any){
+    async update(request: Request, responce: Response){
         try{
             const updatePosts = await PostService.update(request.body);
             responce.json(updatePosts);
@@ -37,7 +39,7 @@ class PostController {
         }
     }
 
-    async delete(request: any, responce: any){
+    async delete(request: Request, responce: Response){
         try{
             const deletedPost = await PostService.delete(request.params.id);
             return responce.json(deletedPost);

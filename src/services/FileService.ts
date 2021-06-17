@@ -1,8 +1,9 @@
 import * as uuid from 'uuid';
 import * as path from 'path';
+import { UploadedFile } from 'express-fileupload';
 
 class FileService{
-    saveFile(file: any){
+    saveFile(file: UploadedFile){
         try{
             const fileName = uuid.v4() + '.jpeg';
             const filePath = path.resolve('static', fileName);

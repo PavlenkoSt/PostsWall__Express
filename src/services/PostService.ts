@@ -1,9 +1,17 @@
+import { UploadedFile } from 'express-fileupload';
 import Post from '../Post.js';
 import FileService from './FileService.js';
 
+type PostType = {
+    author: string
+    title: string
+    content: string
+    picture: string
+    _id?: string
+}
 
 class PostService{
-    async create(post: any, picture: any){
+    async create(post: PostType, picture: UploadedFile){
         const fileName = FileService.saveFile(picture);
         const newPost = await Post.create({...post, picture: fileName });
         return newPost;
@@ -14,7 +22,7 @@ class PostService{
         return posts;
     }
 
-    async getOne(id: any){
+    async getOne(id: string){
         if(!id){
             throw new Error('id не указан');
         }
@@ -22,7 +30,7 @@ class PostService{
         return post;
     }
 
-    async update(post: any){
+    async update(post: PostType){
         if(!post._id){
             throw new Error('id не указан');
         }
@@ -30,7 +38,7 @@ class PostService{
         return updatedPost;
     }
 
-    async delete(id: any){
+    async delete(id: string){
         if(!id){
             throw new Error('id не указан');
         }
